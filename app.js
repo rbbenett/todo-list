@@ -1,19 +1,35 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const Item = require('./models/items');
 const app = express();
-const mongodb = 'mongodb+srv://ckmobile:ckmobile123@cluster0.hgxcv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
-mongoose.connect(mongodb, { 
-  useNewUrlParser: true, 
-  useUnifiedTopology: true }
-  ).then(() => {
-    console.log('connected')
-    app.listen(3000); 
-  }).catch(err => console.log(err));
+const mongodb = 'mongodb+srv://ckmobile:ckmobile123@cluster0.hgxcv.mongodb.net/item-database?retryWrites=true&w=majority';
+mongoose.connect(mongodb, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}
+).then(() => {
+  console.log('connected')
+  app.listen(3000);
+}).catch(err => console.log(err));
 
 app.set('view engine', 'ejs');
 
 
-
+app.get('/create-item', (req, res) => {
+  const item = new Item({
+    name: 'computer',
+    price: 2000
+  });
+  item.save().then(result=>res.send(result))
+})
+app.get('/get-items', (req, res) => {
+  
+  Item.find().then(result=>res.send(result)).catch((err)=>console.log(err))
+})
+app.get('/get-item', (req, res) => {
+  
+  Item.findById("6054ea245d57128bcb88d39c").then(result=>res.send(result)).catch((err)=>console.log(err))
+})
 app.get('/', (req, res) => {
   const items = [
     { name: 'mobile phone', price: 1000 },

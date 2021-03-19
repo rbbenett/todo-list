@@ -12,30 +12,32 @@
 </head>
 
 <body>
-  <nav>
-    <div class="nav-wrapper container">
-      <a href="/" class="brand-logo">CRUD</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="./add-item">Add Item</a></li>
+    <nav>
+      <div class="nav-wrapper container">
+        <a href="/" class="brand-logo">CRUD </a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="./add-item">Add Item</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <ul class="collection with-header">
+       
+          <% if (items.length > 0) { %>
+            
+              <% items.forEach(item => { %>
+                <li class="collection-item">
+              <div><%= item.name%> $<%= item.price%><a href="#!" class="secondary-content"><i class="material-icons">delete</i><i class="material-icons">edit</i></a></div>
+            </li>
+             <% }); %>
+            
+            
+          <% } else { %>
+            <li>There are no items</li>
+          <% } %>
+        
       </ul>
     </div>
-  </nav>
-  <div class="container">
-    <ul class="collection with-header">
-      <li class="collection-item">
-        <div>Alvin<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div>
-      </li>
-      <li class="collection-item">
-        <div>Alvin<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div>
-      </li>
-      <li class="collection-item">
-        <div>Alvin<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div>
-      </li>
-      <li class="collection-item">
-        <div>Alvin<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div>
-      </li>
-    </ul>
-  </div>
 
 
 </body>

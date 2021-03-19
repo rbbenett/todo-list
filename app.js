@@ -1,8 +1,10 @@
+require('dotenv').config();
+
 const express = require('express');
 const mongoose = require('mongoose');
 const Item = require('./models/items');
 const app = express();
-const mongodb = 'mongodb+srv://ckmobile:ckmobile123@cluster0.hgxcv.mongodb.net/item-database?retryWrites=true&w=majority';
+const mongodb = process.env.MONGO_DB;
 mongoose.connect(mongodb, {
   useNewUrlParser: true,
   useUnifiedTopology: true

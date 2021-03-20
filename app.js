@@ -4,6 +4,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const Item = require('./models/items');
 const app = express();
+
+app.use(express.urlencoded({ extended: true }));
 const mongodb = process.env.MONGO_DB;
 mongoose.connect(mongodb, {
   useNewUrlParser: true,
@@ -30,6 +32,14 @@ app.get('/get-items', (req, res) => {
 })
 app.get('/add-item', (req, res) => {
   res.render('add-item');
+})
+
+app.post('/items', (req, res) => {
+  console.log(req.body)
+  const item = Item(req.body);
+  item.save().then(() => {
+    res.redirect('/get-items')
+  }).catch(err => console.log(err))
 })
 
 app.use((req, res) => {
